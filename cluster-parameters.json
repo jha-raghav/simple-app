@@ -10,10 +10,6 @@
             "value": "[resourceGroup().location]"
         },
 
-        "clusterVersion": {
-            "value": "1.17.9"
-        },
-
         "agentNodeCount": {
             "value": "3"      
          },
