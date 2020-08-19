@@ -1,6 +1,80 @@
 {
     "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
     "contentVersion": "1.0.0.0",
+    "parameters": {
+        "clusterName": {
+            "type": "string",
+            "metadata": {
+                "description": "Name of the managed cluster resource"
+            }
+        },
+
+        "region": {
+            "type": "string",
+            "metadata": {
+                "description": "Location of the managed cluster resource"
+            }
+        },
+        "agentNodeCount": {
+            "type": "int",
+            "metadata": {
+                "description": "The number of nodes for the cluster"
+            }       
+         },
+
+         "agentNodeSize": {
+             "type": "string",
+             "metadata": {
+                "description": "Size of the agent Node"
+             }
+         },
+
+         "osType": {
+             "type": "string",
+             "allowedValues": [
+                 "Linux",
+                 "Windows"
+             ],
+             "metadata": {
+                 "descrition": "Type of the operating system"
+             }
+         },
+
+        "dnsPrefix": {
+            "type": "string",
+            "metadata": {
+                "description": "DNS prefix to use with hosted Kubernetes API server FQDN"
+            }
+        },
+
+        "linuxAdminUserName": {
+            "type": "string",
+             "metadata": {
+                 "description": "User name for the Linux Virtual Machines"
+             }
+        },
+
+        "sshRSAPublicKey": {
+            "type": "string",
+            "metadata": {
+                "description": "SSH RSA public key string"
+            }
+        },
+
+        "servicePrincipalClientID": {
+            "type": "securestring",
+            "metadata": {
+                "description": "Client ID (used by cloudprovider)"
+            }
+        },
+
+        "servicePrincialClientSecret": {
+            "type": "securestring",
+            "metadata": {
+                "description": "Service Principal Client Secret"
+            }
+        }
+    },
     "resources": [
         {
             "name": "[parameters('clusterName')]",
@@ -8,7 +82,6 @@
             "apiVersion": "2020-02-01",
             "location": "[parameters('region')]",
             "properties": {
-                "kubernetesVersion": "[parameters('clusterVersion')]",
                 "dnsPrefix": "[parameters('dnsPrefix')]",
                 "agentPoolProfiles": [
                     {
